@@ -1,22 +1,33 @@
-const { dirname } = require('path');
-const path = require('path');
+// const { appendFile } = require('fs');
+// const path = require('path');
 
-const indexPath = path.join(__dirname, "server.js");
+// console.log(__filename);
 
-var absalutePath = --dirname;
+// console.log(__dirname + '/app.js');
 
-var relativePath = './index.html';
+// console.log('./index.html');
 
-const http = require('http');
+// const indexPath = path.join(__dirname, 'index.html');
 
-const server = http.createServer(HandleRequest);
+var http = require('http');
+var server = http.createServer(handleRequest);
+var qs = require('querystring');
 
-function HandleRequest(req,res){
-    req.headers['Content-Type']
-    res.end("this is the response");
+
+function handleRequest(req,res){
+    if(req.method === 'POST' && req.url === '/') {
+        var store = '';
+        req.on('data', (chunk) => {
+            store += chunk;
+        }).on('end', () =>{
+            res.statusCode = 201;
+            var parsedData = qs.parse(store);
+            res.end(JSON.stringify(parsedData));
+        })
+    }
 }
 
-server.listen(9000, () => {
-    console.log("server listen on port 9k");
-})
 
+server.listen(3000, () => {
+    console.log('server listen on the port of 3k')
+});
