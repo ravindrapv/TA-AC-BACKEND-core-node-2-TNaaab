@@ -1,0 +1,11 @@
+// - name
+// - email
+// - username(unique)
+// - bio
+
+{
+    "name":"ravindra",
+    "email":"ravindra.ravi4849@gmail.com",
+    "username":"ravinrapv",
+    "bio":"a full stack developer from india"
+}
